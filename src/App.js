@@ -12,7 +12,7 @@ function App() {
   useSelector((state) => console.log(state));
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename="/NeverNotes">
         <Layout>
           <Switch>
             <PrivateRoute exact path="/">
