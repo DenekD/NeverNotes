@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/NeverNotes/static/css/main.659b8354.chunk.css",
+    "main.js": "/NeverNotes/static/js/main.91b96fac.chunk.js",
+    "main.js.map": "/NeverNotes/static/js/main.91b96fac.chunk.js.map",
+    "runtime-main.js": "/NeverNotes/static/js/runtime-main.d492cd00.js",
+    "runtime-main.js.map": "/NeverNotes/static/js/runtime-main.d492cd00.js.map",
+    "static/js/2.497035ff.chunk.js": "/NeverNotes/static/js/2.497035ff.chunk.js",
+    "static/js/2.497035ff.chunk.js.map": "/NeverNotes/static/js/2.497035ff.chunk.js.map",
+    "static/js/3.d5d12638.chunk.js": "/NeverNotes/static/js/3.d5d12638.chunk.js",
+    "static/js/3.d5d12638.chunk.js.map": "/NeverNotes/static/js/3.d5d12638.chunk.js.map",
+    "index.html": "/NeverNotes/index.html",
+    "static/css/main.659b8354.chunk.css.map": "/NeverNotes/static/css/main.659b8354.chunk.css.map",
+    "static/js/2.497035ff.chunk.js.LICENSE.txt": "/NeverNotes/static/js/2.497035ff.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d492cd00.js",
+    "static/js/2.497035ff.chunk.js",
+    "static/css/main.659b8354.chunk.css",
+    "static/js/main.91b96fac.chunk.js"
+  ]
+}
