@@ -17,7 +17,7 @@ function Topbar({ handleDrawerOpen, open }) {
   return (
     <Box>
       <CssBaseline />
-      <AppBar position="fixed" open={open} color="secondary">
+      <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"

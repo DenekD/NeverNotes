@@ -26,17 +26,17 @@ import SnackBarComponent from "../../helpers/SnackBarComponent";
 const signedInMenuItems = [
   {
     text: "My Notes",
-    icon: <SubjectOutlined color="primary" />,
+    icon: <SubjectOutlined color="success" />,
     path: "/",
   },
   {
     text: "Create Note",
-    icon: <AddCircleOutlined color="primary" />,
+    icon: <AddCircleOutlined color="success" />,
     path: "/create",
   },
   {
     text: "Logout",
-    icon: <LogoutIcon color="primary" />,
+    icon: <LogoutIcon color="success" />,
     path: "",
   },
 ];
@@ -44,12 +44,12 @@ const signedInMenuItems = [
 const signedOutMenuItems = [
   {
     text: "Sign In",
-    icon: <LoginIcon color="primary" />,
+    icon: <LoginIcon color="success" />,
     path: "/signIn",
   },
   {
     text: "Sign Up",
-    icon: <PersonAddIcon color="primary" />,
+    icon: <PersonAddIcon color="success" />,
     path: "/signUp",
   },
 ];
@@ -77,7 +77,7 @@ export default function Layout({ children }) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       {/* <Topbar open={open} handleDrawerOpen={() => setOpen(true)} /> */}
-      <AppBar position="fixed" open={open} color="primary">
+      <AppBar position="fixed" open={open} color="success">
         <Toolbar>
           <IconButton
             color="inherit"

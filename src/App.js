@@ -9,7 +9,7 @@ import SignUp from "./pages/SignUp";
 import { PrivateRoute } from "./helpers/PrivateRoute";
 
 function App() {
-  useSelector((state) => console.log(state));
+  // useSelector((state) => console.log(state));
   return (
     <div>
       <BrowserRouter basename="/NeverNotes">
@@ -18,9 +18,9 @@ function App() {
             <PrivateRoute exact path="/">
               <Dashboard />
             </PrivateRoute>
-            <Route path="/notes/:id">
+            {/* <Route path="/notes/:id">
               <NoteDatail />
-            </Route>
+            </Route> */}
             <PrivateRoute path="/create">
               <CreateNote />
             </PrivateRoute>

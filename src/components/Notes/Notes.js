@@ -1,4 +1,4 @@
-import { Container, Fab } from "@mui/material";
+import { Container, Divider, Fab } from "@mui/material";
 
 import React, { Fragment } from "react";
 import Masonry from "react-masonry-css";
@@ -7,26 +7,51 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import NoteCard from "./NoteCard";
 import ScrollTop from "./ScrollTop";
 import { useDispatch } from "react-redux";
-import { deleteNote } from "../../store/actions/notesActions";
+import { deleteNote, shareNote } from "../../store/actions/notesActions";
 import NoteDetailDialog from "./NoteDetailDialog";
+import EmailCoopDialog from "./EmailCoopDialog";
 
-export default function Notes({ notes }) {
+export default function Notes({ notes, sharedNotes }) {
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
+
+  // Detail Dailog
+  const [openDetailDialog, setOpenDetailDialog] = React.useState(false);
   const [dialogDetails, setDialogDetails] = React.useState({});
 
-  const handleClickOpen = (details) => {
-    setOpen(true);
+  const handleClickOpenDetailDialog = (details) => {
+    setOpenDetailDialog(true);
     setDialogDetails(details);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseDetailDialog = () => {
+    setOpenDetailDialog(false);
     setDialogDetails({});
   };
 
-  const handleDelete = async (id) => {
-    dispatch(deleteNote(id));
+  //Cooperation dialog
+
+  const [openCoopDialog, setOpenCoopDialog] = React.useState(false);
+  const [sharingNote, setSharingNote] = React.useState(0);
+
+  const handleClickOpenCoopDialog = (note) => {
+    setOpenCoopDialog(true);
+    setSharingNote(note);
+  };
+
+  const handleCloseCoopDialog = (email) => {
+    setOpenCoopDialog(false);
+  };
+
+  const handleEnterEmail = (email) => {
+    // console.log(sharingNote, email);
+    dispatch(shareNote(sharingNote, email));
+    setOpenCoopDialog(false);
+  };
+
+  // delete & edit note
+
+  const handleDeleteNote = async (id, isShared) => {
+    dispatch(deleteNote(id, isShared));
   };
 
   const breakpointColumnsObj = {
@@ -48,16 +73,34 @@ export default function Notes({ notes }) {
               <div key={note.id}>
                 <NoteCard
                   note={note}
-                  onDelete={handleDelete}
-                  handleClickOpen={handleClickOpen}
+                  onDelete={handleDeleteNote}
+                  handleClickOpen={handleClickOpenDetailDialog}
+                  handleClickOpenCoopDialog={handleClickOpenCoopDialog}
+                />
+              </div>
+            ))}
+
+          {sharedNotes &&
+            sharedNotes.map((note) => (
+              <div key={note.id}>
+                <NoteCard
+                  note={note}
+                  onDelete={handleDeleteNote}
+                  handleClickOpen={handleClickOpenDetailDialog}
+                  handleClickOpenCoopDialog={handleClickOpenCoopDialog}
                 />
               </div>
             ))}
         </Masonry>
         <NoteDetailDialog
-          handleClose={handleClose}
-          open={open}
+          handleClose={handleCloseDetailDialog}
+          open={openDetailDialog}
           details={dialogDetails}
+        />
+        <EmailCoopDialog
+          open={openCoopDialog}
+          handleClose={handleCloseCoopDialog}
+          handleEnter={handleEnterEmail}
         />
       </Container>
       <ScrollTop>

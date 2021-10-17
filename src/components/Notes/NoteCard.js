@@ -38,7 +38,12 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
   [`& .${tooltipClasses.tooltip}`]: {},
 });
 
-export default function NoteCard({ note, onDelete, handleClickOpen }) {
+export default function NoteCard({
+  note,
+  onDelete,
+  handleClickOpen,
+  handleClickOpenCoopDialog,
+}) {
   const classes = useStyles(note);
   return (
     <Card elevation={2}>
@@ -48,7 +53,10 @@ export default function NoteCard({ note, onDelete, handleClickOpen }) {
         }
         sx={{ cursor: "pointer" }}
       >
-        <CardHeader title={note.title} />
+        <CardHeader
+          title={note.title}
+          subheader={note.sharedWith && `współpraca z ${note.sharedWith}`}
+        />
         <CardContent>
           <Typography variant="body2" color={"text.secondary"}>
             {note.content}
@@ -62,13 +70,16 @@ export default function NoteCard({ note, onDelete, handleClickOpen }) {
           className={classes.avatar}
           sx={{ mr: "auto" }}
         />
-        <CustomWidthTooltip title="dodaj współpracownika">
-          <IconButton>
-            <PersonAddIcon />
-          </IconButton>
-        </CustomWidthTooltip>
+        {!note.sharedWith && (
+          <Tooltip title="dodaj współpracownika">
+            <IconButton onClick={() => handleClickOpenCoopDialog(note)}>
+              <PersonAddIcon />
+            </IconButton>
+          </Tooltip>
+        )}
+
         <Tooltip title="usuń">
-          <IconButton onClick={() => onDelete(note.id)}>
+          <IconButton onClick={() => onDelete(note.id, note.sharedWith)}>
             <DeleteOutlined />
           </IconButton>
         </Tooltip>

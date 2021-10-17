@@ -17,7 +17,7 @@ export default function AlertDialog({ open, handleClose, details }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title" sx={{ display: "flex" }}>
-          <Typography variant="h5" sx={{ flexGrow: 1 }}>
+          <Typography variant="p" sx={{ flexGrow: 1 }}>
             {details.title}
           </Typography>
           <IconButton onClick={handleClose}>

@@ -6,6 +6,7 @@ import Notes from "../components/Notes/Notes";
 
 const Dashboard = () => {
   const authorId = useSelector((state) => state.firebase.auth.uid);
+  const authorEmail = useSelector((state) => state.firebase.auth.email);
   // console.log(authorId);
 
   useFirestoreConnect([
@@ -20,29 +21,28 @@ const Dashboard = () => {
 
   useFirestoreConnect([
     {
-      collection: "notes",
-      doc: authorId,
+      collection: "sharedNotes",
+      doc: authorEmail,
       subcollections: [{ collection: "sharedNotes" }],
-      storeAs: "sharedNotesFromOtherUser",
-      orderBy: ["createdAt", "desc"],
+      storeAs: "NotesSharedByOtherUsers",
+      // orderBy: ["createdAt", "desc"],
     },
   ]);
 
   const notesFromFrirebase = useSelector(
     (state) => state.firestore.ordered.UserNotes
   );
-  const sharedCredentials = useSelector(
-    (state) => state.firestore.ordered.sharedNotesFromOtherUser
+  const sharedNotes = useSelector(
+    (state) => state.firestore.ordered.NotesSharedByOtherUsers
   );
 
-  sharedCredentials && console.log(sharedCredentials);
-
-  // notesFromFrirebase && console.log(notesFromFrirebase);
+  // sharedNotes && notesFromFrirebase && notesFromFrirebase.concat(sharedNotes);
+  // notesFromFrirebase && notesFromFrirebase.push(sharedNotes);
 
   return (
     <>
       {/* <SnackBarComponent /> */}
-      <Notes notes={notesFromFrirebase} />
+      <Notes notes={notesFromFrirebase} sharedNotes={sharedNotes} />
     </>
   );
 };
