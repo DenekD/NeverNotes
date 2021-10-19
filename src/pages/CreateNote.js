@@ -18,7 +18,7 @@ export default function Create() {
   const [content, setContent] = useState("");
   const [titleError, setTitleError] = useState();
   const [contentError, setContentError] = useState();
-  const [category, setCategory] = useState("female");
+  const [category, setCategory] = useState("todos");
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -86,7 +86,7 @@ export default function Create() {
       <FormControl component="fieldset" sx={{ mt: 2 }}>
         <FormLabel component="legend">Category</FormLabel>
         <RadioGroup
-          // defaultValue="male"
+          defaultValue="todos"
           name="radio-buttons-group"
           value={category}
           onChange={(e) => setCategory(e.target.value)}

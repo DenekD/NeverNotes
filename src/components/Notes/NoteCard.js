@@ -5,6 +5,7 @@ import {
   CardContent,
   CardHeader,
   Chip,
+  Divider,
   IconButton,
   Tooltip,
   tooltipClasses,
@@ -49,20 +50,28 @@ export default function NoteCard({
     <Card elevation={2}>
       <Box
         onClick={() =>
-          handleClickOpen({ title: note.title, content: note.content })
+          handleClickOpen({
+            title: note.title,
+            content: note.content,
+            id: note.id,
+            sharedWith: note.sharedWith,
+          })
         }
         sx={{ cursor: "pointer" }}
       >
         <CardHeader
           title={note.title}
+          // titleTypographyProps={{ variant: "h5" }}
           subheader={note.sharedWith && `współpraca z ${note.sharedWith}`}
         />
+        <Divider />
         <CardContent>
           <Typography variant="body2" color={"text.secondary"}>
             {note.content}
           </Typography>
         </CardContent>
       </Box>
+      <Divider />
       <CardActions>
         <Chip
           label={note.category}

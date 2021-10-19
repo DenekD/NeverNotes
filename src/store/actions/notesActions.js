@@ -4,6 +4,7 @@ import {
   doc,
   deleteDoc,
   setDoc,
+  updateDoc,
 } from "@firebase/firestore";
 
 import { getAuth } from "firebase/auth";
@@ -46,14 +47,13 @@ export const deleteNote = (id, sharedWith) => {
     const authorId = getState().firebase.auth.uid;
     const authorEmail = getState().firebase.auth.email;
 
-    console.log(id);
-
     // ustalam (na podstawie property sharedWith) z której kolekcji usunąc
     const isSharing = sharedWith ? true : false;
 
     const deleteNotes = async () => {
       if (isSharing) {
         await deleteDoc(doc(db, `sharedNotes/${authorEmail}/sharedNotes`, id));
+        await deleteDoc(doc(db, `sharedNotes/${sharedWith}/sharedNotes`, id));
       } else {
         await deleteDoc(doc(db, `notes/${authorId}/notes`, id));
       }
@@ -82,11 +82,6 @@ export const shareNote = (note, email) => {
         sharedWith: email,
       };
 
-      // const collectionRef = collection(
-      //   db,
-      //   `sharedNotes/${authorEmail}/sharedNotes`
-      // );
-      // await addDoc(collectionRef, noteWithExtraData);
       await setDoc(
         doc(db, `sharedNotes/${authorEmail}/sharedNotes`, note.id),
         noteWithExtraData
@@ -102,8 +97,6 @@ export const shareNote = (note, email) => {
         doc(db, `sharedNotes/${email}/sharedNotes`, note.id),
         noteWithExtraData2
       );
-      // const collectionRef2 = collection(db, `sharedNotes/${email}/sharedNotes`);
-      // await addDoc(collectionRef2, noteWithExtraData2);
 
       // usuwam z kolekcji w notes
       await deleteDoc(doc(db, `notes/${authorId}/notes`, note.id));
@@ -111,13 +104,62 @@ export const shareNote = (note, email) => {
 
     try {
       await shareData();
-      dispatch({ type: "DELETE_PROJECT", id: note.id });
+      dispatch({ type: "SHARED_PROJECT", id: note.id });
       dispatch({
         type: "OPEN_NOTIFICATION",
         message: `note is shareing with ${email}`,
       });
     } catch (err) {
-      dispatch({ type: "DELETE_PROJECT_ERROR", err });
+      dispatch({ type: "SHARED_PROJECT_ERROR", err });
+    }
+  };
+};
+
+export const updateNote = (id, newContent, sharedWith) => {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
+    const db = getFirestore();
+    const authorId = getState().firebase.auth.uid;
+    const authorEmail = getState().firebase.auth.email;
+
+    if (!id) {
+      return;
+    }
+
+    // console.log(id, newContent);
+
+    const updateData = async () => {
+      if (sharedWith) {
+        const collectionRef = doc(
+          db,
+          `sharedNotes/${authorEmail}/sharedNotes`,
+          id
+        );
+        const collectionRefColab = doc(
+          db,
+          `sharedNotes/${sharedWith}/sharedNotes`,
+          id
+        );
+
+        await updateDoc(collectionRef, {
+          content: newContent,
+        });
+        await updateDoc(collectionRefColab, {
+          content: newContent,
+        });
+      } else {
+        const collectionRef = doc(db, `notes/${authorId}/notes`, id);
+        await updateDoc(collectionRef, {
+          content: newContent,
+        });
+      }
+    };
+
+    try {
+      await updateData();
+      dispatch({ type: "UPDATE_NOTE", id });
+      dispatch({ type: "OPEN_NOTIFICATION", message: "note was updated" });
+    } catch (err) {
+      dispatch({ type: "UPDATE_NOTE_ERROR", err });
     }
   };
 };
