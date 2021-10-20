@@ -1,22 +1,23 @@
 {
   "files": {
     "main.css": "/NeverNotes/static/css/main.659b8354.chunk.css",
-    "main.js": "/NeverNotes/static/js/main.0ed40c87.chunk.js",
-    "main.js.map": "/NeverNotes/static/js/main.0ed40c87.chunk.js.map",
+    "main.js": "/NeverNotes/static/js/main.6c6d15df.chunk.js",
+    "main.js.map": "/NeverNotes/static/js/main.6c6d15df.chunk.js.map",
     "runtime-main.js": "/NeverNotes/static/js/runtime-main.cdc0942d.js",
     "runtime-main.js.map": "/NeverNotes/static/js/runtime-main.cdc0942d.js.map",
-    "static/js/2.54f89df1.chunk.js": "/NeverNotes/static/js/2.54f89df1.chunk.js",
-    "static/js/2.54f89df1.chunk.js.map": "/NeverNotes/static/js/2.54f89df1.chunk.js.map",
+    "static/js/2.84fa0d30.chunk.js": "/NeverNotes/static/js/2.84fa0d30.chunk.js",
+    "static/js/2.84fa0d30.chunk.js.map": "/NeverNotes/static/js/2.84fa0d30.chunk.js.map",
     "static/js/3.75ee98b9.chunk.js": "/NeverNotes/static/js/3.75ee98b9.chunk.js",
     "static/js/3.75ee98b9.chunk.js.map": "/NeverNotes/static/js/3.75ee98b9.chunk.js.map",
     "index.html": "/NeverNotes/index.html",
     "static/css/main.659b8354.chunk.css.map": "/NeverNotes/static/css/main.659b8354.chunk.css.map",
-    "static/js/2.54f89df1.chunk.js.LICENSE.txt": "/NeverNotes/static/js/2.54f89df1.chunk.js.LICENSE.txt"
+    "static/js/2.84fa0d30.chunk.js.LICENSE.txt": "/NeverNotes/static/js/2.84fa0d30.chunk.js.LICENSE.txt",
+    "static/media/hippo-av.e3454bb0.png": "/NeverNotes/static/media/hippo-av.e3454bb0.png"
   },
   "entrypoints": [
     "static/js/runtime-main.cdc0942d.js",
-    "static/js/2.54f89df1.chunk.js",
+    "static/js/2.84fa0d30.chunk.js",
     "static/css/main.659b8354.chunk.css",
-    "static/js/main.0ed40c87.chunk.js"
+    "static/js/main.6c6d15df.chunk.js"
   ]
 }
