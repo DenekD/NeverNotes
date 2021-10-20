@@ -22,6 +22,7 @@ import { useHistory, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { signOuting } from "../../store/actions/authActions";
 import SnackBarComponent from "../../helpers/SnackBarComponent";
+import logo from "../../img/hippo-av.png";
 
 const signedInMenuItems = [
   {
@@ -91,13 +92,10 @@ export default function Layout({ children }) {
           >
             <MenuIcon />
           </IconButton>
-          <Avatar sx={{ mx: 1 }} src="/hippo-av.png" />
+          <Avatar sx={{ mx: 1 }} src={logo} />
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             NeverNote
-          </Typography>
-          <Typography variant="h6" component="div">
-            {new Date().toDateString()}
           </Typography>
 
           <Avatar sx={{ ml: 1 }}>{profile.initials}</Avatar>

@@ -47,7 +47,10 @@ export default function NoteCard({
 }) {
   const classes = useStyles(note);
   return (
-    <Card elevation={2}>
+    <Card
+      elevation={2}
+      sx={{ minHeight: 200, display: "flex", flexDirection: "column" }}
+    >
       <Box
         onClick={() =>
           handleClickOpen({
@@ -57,21 +60,21 @@ export default function NoteCard({
             sharedWith: note.sharedWith,
           })
         }
-        sx={{ cursor: "pointer" }}
+        sx={{ cursor: "pointer", flexGrow: 1 }}
       >
         <CardHeader
           title={note.title}
           // titleTypographyProps={{ variant: "h5" }}
           subheader={note.sharedWith && `współpraca z ${note.sharedWith}`}
+          subheaderTypographyProps={{ variant: "subtitle2" }}
         />
-        <Divider />
-        <CardContent>
+        <CardContent sx={{ flexGrow: 1 }}>
           <Typography variant="body2" color={"text.secondary"}>
             {note.content}
           </Typography>
         </CardContent>
       </Box>
-      <Divider />
+
       <CardActions>
         <Chip
           label={note.category}

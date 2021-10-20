@@ -8,7 +8,7 @@ import SignUp from "./pages/SignUp";
 import { PrivateRoute } from "./helpers/PrivateRoute";
 
 function App() {
-  // useSelector((state) => console.log(state));
+  useSelector((state) => console.log(state));
   return (
     <div>
       <BrowserRouter basename="/NeverNotes">
