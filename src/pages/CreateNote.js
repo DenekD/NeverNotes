@@ -13,7 +13,7 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { createNote } from "../store/actions/notesActions";
 
-export default function Create() {
+export default function CreateNote() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [titleError, setTitleError] = useState();

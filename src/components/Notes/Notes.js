@@ -1,8 +1,6 @@
-import { Container, Divider, Fab } from "@mui/material";
-
 import React, { Fragment } from "react";
+import { Container, Fab } from "@mui/material";
 import Masonry from "react-masonry-css";
-
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import NoteCard from "./NoteCard";
 import ScrollTop from "./ScrollTop";
@@ -43,7 +41,6 @@ export default function Notes({ notes, sharedNotes }) {
   };
 
   const handleEnterEmail = (email) => {
-    // console.log(sharingNote, email);
     dispatch(shareNote(sharingNote, email));
     setOpenCoopDialog(false);
   };

@@ -16,24 +16,21 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { AppBar, Drawer, DrawerHeader } from "../../helpers/LayoutHelpers";
 
-import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material";
+import { SubjectOutlined } from "@mui/icons-material";
 import { Avatar, ListItemButton } from "@mui/material";
 import { useHistory, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { signOuting } from "../../store/actions/authActions";
 import SnackBarComponent from "../../helpers/SnackBarComponent";
 import logo from "../../img/hippo-av.png";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const signedInMenuItems = [
   {
     text: "My Notes",
     icon: <SubjectOutlined color="success" />,
     path: "/",
-  },
-  {
-    text: "Create Note",
-    icon: <AddCircleOutlined color="success" />,
-    path: "/create",
   },
   {
     text: "Logout",
@@ -62,7 +59,14 @@ export default function Layout({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
   const profile = useSelector((state) => state.firebase.profile);
 
-  const [open, setOpen] = React.useState(true);
+  const theme = useTheme();
+  const isOpen = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const [open, setOpen] = React.useState(isOpen);
+
+  React.useEffect(() => {
+    setOpen(isOpen);
+  }, [isOpen]);
 
   const handleDrawerOpen = () => {
     setOpen(true);

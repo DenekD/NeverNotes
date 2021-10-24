@@ -1,14 +1,12 @@
 import Layout from "./components/Layout/Layout";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import CreateNote from "./pages/CreateNote";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { PrivateRoute } from "./helpers/PrivateRoute";
 
 function App() {
-  useSelector((state) => console.log(state));
+  // useSelector((state) => console.log(state));
   return (
     <div>
       <BrowserRouter basename="/NeverNotes">
@@ -16,9 +14,6 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/">
               <Dashboard />
-            </PrivateRoute>
-            <PrivateRoute path="/create">
-              <CreateNote />
             </PrivateRoute>
             <Route path="/signin">
               <SignIn />

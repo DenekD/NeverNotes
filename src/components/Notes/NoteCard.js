@@ -5,16 +5,14 @@ import {
   CardContent,
   CardHeader,
   Chip,
-  Divider,
   IconButton,
   Tooltip,
-  tooltipClasses,
   Typography,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { blue, green, pink, yellow } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { Box, styled } from "@mui/system";
+import { Box } from "@mui/system";
 
 const useStyles = makeStyles({
   avatar: {
@@ -33,12 +31,6 @@ const useStyles = makeStyles({
   },
 });
 
-const CustomWidthTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))({
-  [`& .${tooltipClasses.tooltip}`]: {},
-});
-
 export default function NoteCard({
   note,
   onDelete,
@@ -49,7 +41,12 @@ export default function NoteCard({
   return (
     <Card
       elevation={2}
-      sx={{ minHeight: 200, display: "flex", flexDirection: "column" }}
+      sx={{
+        minHeight: 200,
+        display: "flex",
+        flexDirection: "column",
+        textAlign: "left",
+      }}
     >
       <Box
         onClick={() =>

@@ -7,8 +7,6 @@ import {
   updateDoc,
 } from "@firebase/firestore";
 
-import { getAuth } from "firebase/auth";
-
 export const createNote = (note) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     const db = getFirestore();

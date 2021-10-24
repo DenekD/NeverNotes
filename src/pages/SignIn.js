@@ -1,4 +1,10 @@
-import { Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  FormControl,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -36,14 +42,23 @@ const SignIn = () => {
     dispatch(signIn({ email, password }));
   };
   return (
-    <Container>
-      <Typography variant="h4" color="secondary" align="center" gutterBottom>
+    <Container sx={{ textAlign: "center" }}>
+      <Typography variant="h4" color="green" align="center" gutterBottom>
         Zaloguj sie
       </Typography>
 
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <FormControl
+        autoComplete="off"
+        size="medium"
+        onSubmit={handleSubmit}
+        sx={{
+          width: {
+            xs: "100%",
+            md: "60%",
+          },
+        }}
+      >
         <TextField
-          // sx={{ mb: 2 }}
           margin="normal"
           required
           fullWidth
@@ -54,7 +69,6 @@ const SignIn = () => {
           error={emailError}
         />
         <TextField
-          // sx={{ mb: 2 }}
           margin="normal"
           required
           fullWidth
@@ -70,13 +84,15 @@ const SignIn = () => {
           variant="contained"
           size="large"
           color="success"
+          onClick={handleSubmit}
+          sx={{ mx: "auto", mt: 2 }}
           endIcon={<KeyboardArrowRightIcon />}
         >
           zaloguj sie
         </Button>
         {/* !!!!!!!!! do zrobienia text error */}
         <div className="">{authError ? <p>{authError}</p> : null}</div>
-      </form>
+      </FormControl>
     </Container>
   );
 };

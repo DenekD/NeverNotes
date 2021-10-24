@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 // import DialogContentText from "@mui/material/DialogContentText";
@@ -23,7 +23,7 @@ export default function AlertDialog({ open, handleClose, details }) {
     }, 900);
 
     return () => clearTimeout(timerID);
-  }, [contentText, dispatch, details.id]);
+  }, [contentText, dispatch, details.id, details.sharedWith]);
 
   const contentTextHandler = (e) => {
     setContentText(e.target.value);
@@ -55,9 +55,6 @@ export default function AlertDialog({ open, handleClose, details }) {
             fullWidth
             onChange={contentTextHandler}
           />
-          {/* <DialogContentText id="alert-dialog-description">
-            {details.content}
-          </DialogContentText> */}
         </DialogContent>
       </Dialog>
     </div>

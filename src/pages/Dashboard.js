@@ -1,13 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useSelector, useDispatch } from "react-redux";
+import { isLoaded, useFirestoreConnect } from "react-redux-firebase";
 import Notes from "../components/Notes/Notes";
-// import SnackBarComponent from "../helpers/SnackBarComponent";
+import CreateNote from "../components/CreateNote/CreateNote";
+import CreateNoteTextField from "../components/CreateNote/CreateNoteTextField";
+import { Box } from "@mui/system";
+import { createNote } from "../store/actions/notesActions";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const authorId = useSelector((state) => state.firebase.auth.uid);
   const authorEmail = useSelector((state) => state.firebase.auth.email);
-  // console.log(authorId);
 
   useFirestoreConnect([
     {
@@ -36,14 +39,31 @@ const Dashboard = () => {
     (state) => state.firestore.ordered.NotesSharedByOtherUsers
   );
 
-  // sharedNotes && notesFromFrirebase && notesFromFrirebase.concat(sharedNotes);
-  // notesFromFrirebase && notesFromFrirebase.push(sharedNotes);
+  const [isClicked, setIsClicked] = React.useState(false);
 
+  const openHandler = () => {
+    setIsClicked(true);
+  };
+
+  const closeHandler = (title, content, category) => {
+    setIsClicked(false);
+
+    //if title is empty do nothing
+    if (title !== "") {
+      dispatch(createNote({ title, content, category }));
+    }
+  };
+
+  console.log(isClicked);
   return (
-    <>
-      {/* <SnackBarComponent /> */}
+    <Box sx={{ textAlign: "center" }}>
+      {isClicked ? (
+        <CreateNote closeHandler={closeHandler} />
+      ) : (
+        <CreateNoteTextField clickHandler={openHandler} />
+      )}
       <Notes notes={notesFromFrirebase} sharedNotes={sharedNotes} />
-    </>
+    </Box>
   );
 };
 
