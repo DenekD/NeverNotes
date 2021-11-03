@@ -59,7 +59,7 @@ export default function Notes({ notes, sharedNotes }) {
 
   return (
     <Fragment>
-      <Container>
+      <div>
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"
@@ -99,7 +99,7 @@ export default function Notes({ notes, sharedNotes }) {
           handleClose={handleCloseCoopDialog}
           handleEnter={handleEnterEmail}
         />
-      </Container>
+      </div>
       <ScrollTop>
         <Fab color="secondary" size="small">
           <KeyboardArrowUpIcon />
