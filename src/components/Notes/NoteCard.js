@@ -10,11 +10,13 @@ import {
   IconButton,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { blue, green, pink, yellow } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
+import { useTheme } from "@mui/material/styles";
 
 const useStyles = makeStyles({
   avatar: {
@@ -42,6 +44,11 @@ export default function NoteCard({
   const classes = useStyles(note);
   const [cardElevation, setCardElevation] = useState(0);
   const [isHover, setIsHover] = useState(false);
+
+  const theme = useTheme();
+  const isOpen = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const showIcons = !isOpen || isHover;
 
   return (
     <Card
@@ -86,7 +93,7 @@ export default function NoteCard({
         </CardContent>
       </Box>
 
-      {isHover && (
+      {showIcons && (
         <CardActions>
           <Chip
             label={note.category}

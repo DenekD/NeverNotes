@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Container, Fab } from "@mui/material";
+import { Fab } from "@mui/material";
 import Masonry from "react-masonry-css";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import NoteCard from "./NoteCard";
@@ -113,7 +113,7 @@ export default function Notes({ notes, sharedNotes }) {
         />
       </div>
       <ScrollTop>
-        <Fab color="secondary" size="small">
+        <Fab sx={{ backgroundColor: "#2E7D32", color: "#fff" }} size="small">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>

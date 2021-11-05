@@ -156,9 +156,9 @@ export default function Layout({ children }) {
               >
                 <ListItemIcon>
                   {tagClicked && tagClicked === tag ? (
-                    <LabelIcon />
+                    <LabelIcon color="success" />
                   ) : (
-                    <LabelOutlinedIcon />
+                    <LabelOutlinedIcon color="success" />
                   )}
                 </ListItemIcon>
                 <ListItemText primary={tag} />
