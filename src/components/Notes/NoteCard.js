@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import { DeleteOutlined } from "@mui/icons-material";
 import {
   Card,
@@ -38,11 +40,23 @@ export default function NoteCard({
   handleClickOpenCoopDialog,
 }) {
   const classes = useStyles(note);
+  const [cardElevation, setCardElevation] = useState(0);
+  const [isHover, setIsHover] = useState(false);
+
   return (
     <Card
-      elevation={2}
+      elevation={cardElevation}
+      onMouseEnter={() => {
+        setCardElevation(1);
+        setIsHover(true);
+      }}
+      onMouseLeave={() => {
+        setCardElevation(0);
+        setIsHover(false);
+      }}
       sx={{
         minHeight: 200,
+        border: "1px #E0E0E0 solid",
         display: "flex",
         flexDirection: "column",
         textAlign: "left",
@@ -72,27 +86,29 @@ export default function NoteCard({
         </CardContent>
       </Box>
 
-      <CardActions>
-        <Chip
-          label={note.category}
-          variant="outlined"
-          className={classes.avatar}
-          sx={{ mr: "auto" }}
-        />
-        {!note.sharedWith && (
-          <Tooltip title="dodaj współpracownika">
-            <IconButton onClick={() => handleClickOpenCoopDialog(note)}>
-              <PersonAddIcon />
+      {isHover && (
+        <CardActions>
+          <Chip
+            label={note.category}
+            variant="outlined"
+            className={classes.avatar}
+            sx={{ mr: "auto" }}
+          />
+          {!note.sharedWith && (
+            <Tooltip title="dodaj współpracownika">
+              <IconButton onClick={() => handleClickOpenCoopDialog(note)}>
+                <PersonAddIcon />
+              </IconButton>
+            </Tooltip>
+          )}
+
+          <Tooltip title="usuń">
+            <IconButton onClick={() => onDelete(note.id, note.sharedWith)}>
+              <DeleteOutlined />
             </IconButton>
           </Tooltip>
-        )}
-
-        <Tooltip title="usuń">
-          <IconButton onClick={() => onDelete(note.id, note.sharedWith)}>
-            <DeleteOutlined />
-          </IconButton>
-        </Tooltip>
-      </CardActions>
+        </CardActions>
+      )}
     </Card>
   );
 }

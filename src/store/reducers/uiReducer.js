@@ -2,6 +2,7 @@ const initState = {
   isNotificationOpen: false,
   notificationMessage: "",
   severity: "success",
+  tagClicked: "All",
 };
 
 const uiReducer = (state = initState, action) => {
@@ -14,11 +15,15 @@ const uiReducer = (state = initState, action) => {
         severity: action.severity,
       };
     case "CLOSE_NOTIFICATION":
-      console.log(action.reason);
       if (action.reason === "clickaway") {
         return { ...state, isNotificationOpen: true };
       }
       return { ...state, isNotificationOpen: false };
+    case "TAG_CLICKED":
+      // if (action.tag === "clickaway") {
+      //   return { ...state, isNotificationOpen: true };
+      // }
+      return { ...state, tagClicked: action.tag };
     default:
       return state;
   }

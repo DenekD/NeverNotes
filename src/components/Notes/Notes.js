@@ -4,13 +4,15 @@ import Masonry from "react-masonry-css";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import NoteCard from "./NoteCard";
 import ScrollTop from "./ScrollTop";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteNote, shareNote } from "../../store/actions/notesActions";
 import NoteDetailDialog from "./NoteDetailDialog";
 import EmailCoopDialog from "./EmailCoopDialog";
 
 export default function Notes({ notes, sharedNotes }) {
   const dispatch = useDispatch();
+
+  const tagClicked = useSelector((state) => state.ui.tagClicked);
 
   // Detail Dailog
   const [openDetailDialog, setOpenDetailDialog] = React.useState(false);
@@ -66,28 +68,38 @@ export default function Notes({ notes, sharedNotes }) {
           columnClassName="my-masonry-grid_column"
         >
           {notes &&
-            notes.map((note) => (
-              <div key={note.id}>
-                <NoteCard
-                  note={note}
-                  onDelete={handleDeleteNote}
-                  handleClickOpen={handleClickOpenDetailDialog}
-                  handleClickOpenCoopDialog={handleClickOpenCoopDialog}
-                />
-              </div>
-            ))}
+            notes.map((note) => {
+              if (tagClicked === "All" || tagClicked === note.category) {
+                return (
+                  <div key={note.id}>
+                    <NoteCard
+                      note={note}
+                      onDelete={handleDeleteNote}
+                      handleClickOpen={handleClickOpenDetailDialog}
+                      handleClickOpenCoopDialog={handleClickOpenCoopDialog}
+                    />
+                  </div>
+                );
+              }
+              return null;
+            })}
 
           {sharedNotes &&
-            sharedNotes.map((note) => (
-              <div key={note.id}>
-                <NoteCard
-                  note={note}
-                  onDelete={handleDeleteNote}
-                  handleClickOpen={handleClickOpenDetailDialog}
-                  handleClickOpenCoopDialog={handleClickOpenCoopDialog}
-                />
-              </div>
-            ))}
+            sharedNotes.map((note) => {
+              if (tagClicked === "All" || tagClicked === note.category) {
+                return (
+                  <div key={note.id}>
+                    <NoteCard
+                      note={note}
+                      onDelete={handleDeleteNote}
+                      handleClickOpen={handleClickOpenDetailDialog}
+                      handleClickOpenCoopDialog={handleClickOpenCoopDialog}
+                    />
+                  </div>
+                );
+              }
+              return null;
+            })}
         </Masonry>
         <NoteDetailDialog
           handleClose={handleCloseDetailDialog}

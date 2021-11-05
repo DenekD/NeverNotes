@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 
 import Toolbar from "@mui/material/Toolbar";
@@ -14,6 +14,8 @@ import ListItemText from "@mui/material/ListItemText";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
+import LabelIcon from "@mui/icons-material/Label";
 import { AppBar, Drawer, DrawerHeader } from "../../helpers/LayoutHelpers";
 
 import { SubjectOutlined } from "@mui/icons-material";
@@ -52,6 +54,8 @@ const signedOutMenuItems = [
   },
 ];
 
+const tagsMenuItems = ["All", "todos", "money", "work"];
+
 export default function Layout({ children }) {
   const location = useLocation();
   const history = useHistory();
@@ -62,9 +66,11 @@ export default function Layout({ children }) {
   const theme = useTheme();
   const isOpen = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const [open, setOpen] = React.useState(isOpen);
+  const tagClicked = useSelector((state) => state.ui.tagClicked);
 
-  React.useEffect(() => {
+  const [open, setOpen] = useState(isOpen);
+
+  useEffect(() => {
     setOpen(isOpen);
   }, [isOpen]);
 
@@ -77,6 +83,7 @@ export default function Layout({ children }) {
   };
 
   const links = auth.uid ? signedInMenuItems : signedOutMenuItems;
+  const tags = auth.uid ? tagsMenuItems : null;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -133,6 +140,31 @@ export default function Layout({ children }) {
           ))}
         </List>
         <Divider />
+        <List>
+          {tags &&
+            tags.map((tag) => (
+              <ListItemButton
+                key={tag}
+                sx={
+                  tagClicked && tagClicked === tag
+                    ? { backgroundColor: "#f4f4f4" }
+                    : null
+                }
+                onClick={() => {
+                  dispatch({ type: "TAG_CLICKED", tag });
+                }}
+              >
+                <ListItemIcon>
+                  {tagClicked && tagClicked === tag ? (
+                    <LabelIcon />
+                  ) : (
+                    <LabelOutlinedIcon />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={tag} />
+              </ListItemButton>
+            ))}
+        </List>
       </Drawer>
       <Box
         component="main"
